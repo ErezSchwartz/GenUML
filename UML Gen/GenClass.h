@@ -2,12 +2,15 @@
 #include<iostream>
 #include<vector>
 #include<fstream>
-
-//this is for a parsed class  
+#include"Function.h"
+#include "Variable.h"
+#define CLASS_LEN 5
+//this is for a parsed class
 class GenClass
 {
 public:
-	GenClass();
+	//the string for GenClass is a string name of all of the file
+	GenClass(std::string);
 	~GenClass();
 	//this function recieves the file name, parses it and returns true if successful or false if not
 	bool ParseFile(std::string);
@@ -19,9 +22,14 @@ private:
 	function saved-
 	<Type of access level> { <name of var> :<Type of var> ... }
 	*/
-	std::vector<std::string> ListOfVars;
-	std::vector<std::string> ListOfFuncs;
+	std::vector<Variable> _listOfVars;
+	std::vector<Function> _listOfFuncs;
 	//this is for inheritance
-	std::vector<GenClass> ListOfSonClasses;
-	bool ValidString(std::string);
+	std::vector<GenClass> _listOfSonClasses;
+	std::string* _name;
+	bool ValidFileName(std::string);
+	//parses a line, and places it in its currect place
+	void ParseLine(std::string);
+	std::string trim(const std::string&);
+	std::string GetClassName(const std::string);
 };
